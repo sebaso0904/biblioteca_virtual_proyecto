@@ -3,5 +3,7 @@
 using namespace std:
 
 int main(){
-    cout"prueba de manipulacion";
+    cout<<"prueba de manipulacion";
+    cout<<"segunda prueba";
+
 }
