@@ -95,7 +95,10 @@ public:
 class SistemaBiblioteca {
 private:
     vector<Libro*> libros;
+
 public:
+    void cargarLibrosDesdeArchivo(const string& nombreArchivo);  // Hacemos pública la función
+
     void agregarLibro() {
         string titulo;
         cout << "Ingrese el titulo del libro: ";
@@ -117,11 +120,34 @@ public:
     }
 };
 
+void SistemaBiblioteca::cargarLibrosDesdeArchivo(const string& nombreArchivo) {
+    ifstream archivo(nombreArchivo);
+    if (!archivo.is_open()) {
+        cerr << "No se pudo abrir el archivo de libros.\n";
+        return;
+    }
+
+    string linea;
+    while (getline(archivo, linea)) {
+        if (!linea.empty()) {
+            libros.push_back(new Libro(linea));
+        }
+    }
+    archivo.close();
+    cout << "Libros cargados desde el archivo.\n";
+}
+
 // -------------------- Menú Principal --------------------
 void menuBiblioteca(const string& rol) {
     SistemaBiblioteca biblioteca;
-    int opcion;
 
+    // Cargar libros al iniciar
+    string nombreArchivo;
+    cout << "Ingrese el nombre del archivo de libros (ej. libros.txt): ";
+    cin >> nombreArchivo;
+    biblioteca.cargarLibrosDesdeArchivo(nombreArchivo);
+
+    int opcion;
     do {
         cout << "\n--- MENU BIBLIOTECA ---\n";
         cout << "1. Listar libros\n";
