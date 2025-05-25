@@ -1,6 +1,2 @@
-admin 1234 administrador
-juan abc123 profesor
-pedro 1111 estudiante
-richard 1234 administrador
-ffff ffff administrador
-jose 1234 administrador
+admin admin administrador
+
