@@ -3,10 +3,10 @@ El Principito,Disponible,7
 1984,Disponible,4
 Don Quijote,Disponible,4
 Moby Dick,Disponible,6
-Rayuela,Disponible,1
+Rayuela,Agotado,0
 Hamlet,Disponible,2
 La Odisea,Disponible,3
 El Aleph,Disponible,8
 La Metamorfosis,Disponible,7
-melany,nuevo,3
-la chica del tren,disponible,2
+melany,Agotado,3
+la chica del tren,Agotado,2

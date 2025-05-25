@@ -7,7 +7,7 @@
 #include <algorithm>
 using namespace std;
 
-// -------------------- Usuario Login --------------------
+// -------------------- Usuario --------------------
 class Usuario {
 private:
     string usuario;
@@ -26,10 +26,17 @@ public:
     }
 };
 
+// -------------------- Singleton aplicado en SistemaLogin --------------------
 class SistemaLogin {
 private:
     vector<Usuario> listaUsuarios;
     string archivoUsuarios;
+
+    static SistemaLogin* instancia;
+
+    SistemaLogin(const string& archivo) : archivoUsuarios(archivo) {
+        cargarUsuariosDesdeArchivo();
+    }
 
     void cargarUsuariosDesdeArchivo() {
         listaUsuarios.clear();
@@ -56,8 +63,11 @@ private:
     }
 
 public:
-    SistemaLogin(const string& archivo) : archivoUsuarios(archivo) {
-        cargarUsuariosDesdeArchivo();
+    static SistemaLogin* getInstancia(const string& archivo = "usuarios.txt") {
+        if (instancia == nullptr) {
+            instancia = new SistemaLogin(archivo);
+        }
+        return instancia;
     }
 
     bool iniciarSesion(const string& user, const string& pass, string& rol) {
@@ -80,13 +90,13 @@ public:
         cin >> pass;
         cout << "Ingrese rol (<1> administrador, <2> profesor, <3> estudiante): ";
         cin >> rol2;
-        if(rol2==1){ 
-        	rol = "administrador";
-		}else if(rol2==2){
-			rol = "profesor";
-		}else{
-			rol = "estudiante";
-		}
+        if (rol2 == 1) {
+            rol = "administrador";
+        } else if (rol2 == 2) {
+            rol = "profesor";
+        } else {
+            rol = "estudiante";
+        }
         Usuario nuevo(user, pass, rol);
         listaUsuarios.push_back(nuevo);
         guardarUsuarioEnArchivo(nuevo);
@@ -94,6 +104,8 @@ public:
         getch();
     }
 };
+
+SistemaLogin* SistemaLogin::instancia = nullptr;
 
 // -------------------- Biblioteca --------------------
 class Libro {
@@ -282,7 +294,7 @@ void menuBiblioteca(const string& rol, SistemaLogin& sistema) {
                 case 4: biblioteca.agregarLibro(); break;
                 case 5: sistema.crearUsuario(); break;
                 case 6: cout << "Cerrando sesion...\n"; break;
-                default: cout << "Opción inválida.\n"; break;
+                default: cout << "Opcion invalida.\n"; break;
             }
         } else {
             switch (opcion) {
@@ -290,7 +302,7 @@ void menuBiblioteca(const string& rol, SistemaLogin& sistema) {
                 case 2: biblioteca.prestarLibro(); break;
                 case 3: biblioteca.devolverLibro(); break;
                 case 4: cout << "Cerrando sesion...\n"; break;
-                default: cout << "Opción inválida.\n"; break;
+                default: cout << "Opcion invalida.\n"; break;
             }
         }
 
@@ -318,7 +330,7 @@ void inicioSesion(SistemaLogin& sistema) {
 
 // -------------------- main --------------------
 int main() {
-    SistemaLogin sistema("usuarios.txt");
+    SistemaLogin* sistema = SistemaLogin::getInstancia();
     int opcion;
 
     do {
@@ -332,7 +344,7 @@ int main() {
         switch (opcion) {
             case 1:
                 system("cls");
-                inicioSesion(sistema);
+                inicioSesion(*sistema);
                 break;
             case 2:
                 cout << "Saliendo del programa...\n";
