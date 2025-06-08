@@ -1,0 +1,3 @@
+1234|melani|melani@|78|Estudiante
+57|santiago|santiag@|789|Estudiante
+1112277766|edinson|e@q.com|1234|Estudiante
