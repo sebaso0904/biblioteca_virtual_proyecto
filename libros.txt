@@ -6,7 +6,7 @@ Moby Dick,Disponible,6
 Rayuela,Agotado,0
 Hamlet,Disponible,2
 La Odisea,Disponible,3
-El Aleph,Disponible,8
+El Aleph,Disponible,7
 La Metamorfosis,Disponible,7
-melany,Agotado,3
-la chica del tren,Agotado,2
+melany,Disponible,1
+la chica del tren,Disponible,2
